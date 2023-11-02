@@ -41,9 +41,8 @@ Cantidad INT,
 Precio DECIMAL(16,2),
 COD_REST CHAR(5),
 	CHECK (Precio > 0)
+   -- CHECK( 0 < Cantidad < 100 ) 
 );
-
-
 
 
 CREATE TABLE localidad(
