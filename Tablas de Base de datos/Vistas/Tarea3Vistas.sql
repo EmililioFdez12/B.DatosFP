@@ -2,6 +2,7 @@
 -- Editoriales(codigo, nombre_editorial, direccion, codigo_postal, telefono, email)
 -- Libros(ISBN, titulo, autor, editorial, precio, fecha_edicion)
 -- Autores(codigo, nombre, apellidos, fecha_nacimiento)
+DROP SCHEMA bd_libreria;
 CREATE SCHEMA bd_libreria;
 USE bd_libreria;
 
