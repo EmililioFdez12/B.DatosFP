@@ -28,9 +28,9 @@ ISBN CHAR(14) PRIMARY KEY,
 titulo VARCHAR(20),
 autor VARCHAR(8),
 editorial VARCHAR(10),
-precio decimal(16,2),
+precio DECIMAL(16,2),
 fecha_edicion DATE,
-	FOREIGN KEY (autor) REFERENCES autores(codigo) ON UPDATE CASCADE ON DELETE restrict,
+	FOREIGN KEY (autor) REFERENCES autores(codigo) ON UPDATE CASCADE ON DELETE RESTRICT,
 	FOREIGN KEY (editorial) REFERENCES editoriales(codigo) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -58,7 +58,7 @@ VALUES
 ('BET', 'Bertin', 'ApellidoBet');
 
 INSERT INTO libros (isbn,editorial, titulo, autor)
-values
+VALUES
 -- ('1','E001', 'Lengua', 'MAC1'),
 ('2','E001', 'Cono', 'MAC1'),
 ('3','E001', 'Mates', 'MAC1'),
@@ -149,11 +149,11 @@ WHERE autor = 'MAC1';
 
 -- 9 Elimina a los autores que tenga un único libro.
 DELETE FROM autores
-where codigo in (
+WHERE codigo in (
 	SELECT autor 
 	FROM Libros 
 	GROUP BY autor
-	having count(isbn) = 1
+	HAVING COUNT(isbn) = 1
 );
 
 -- 10 Verifica que se han eliminado los autores en la tabla de autores
@@ -161,7 +161,7 @@ SELECT * FROM autores;
 
 -- 11 Crea una vista (Vista_1) con todos los campos de libros y un campo NombreCompleto donde aparezca el nombre completo del autor con el formato "Apellidos, Nombre"
 CREATE VIEW Vista_1 AS
-SELECT libros.*, concat(autores.nombre, ' ', autores.apellidos) NombreCompleto
+SELECT libros.*, CONCAT(autores.nombre, ' ', autores.apellidos) NombreCompleto
 FROM libros INNER JOIN autores ON libros.autor = autores.codigo;
 
 SELECT *
@@ -169,7 +169,7 @@ FROM vista_1;
 
 --  12 Crea una vista (Vista_2) con todos los campos de libros y un campo NombreConIniciales donde aparezca el nombre completo del autor con el formato "Inicial_Nombre. Apellidos".
 CREATE VIEW Vista_2 AS
-SELECT libros.*,concat(UPPER(left(autores.nombre, 3)),'_' ,autores.nombre, '. ' , autores.apellidos)
+SELECT libros.*,CONCAT(UPPER(LEFT(autores.nombre, 3)),'_' ,autores.nombre, '. ' , autores.apellidos)
 FROM libros INNER JOIN autores ON libros.autor = autores.codigo;
 
 SELECT *

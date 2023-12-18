@@ -143,10 +143,10 @@ INNER JOIN ejemplares ON libros.signatura = ejemplares.signatura
 ORDER BY signatura;
 
 -- 22. Igual que el anterior, pero que sólo se muestren aquellos libros que hayan sido sacados más de 50 veces.
-SELECT signatura, titulo , contPrestados
+SELECT ejemplares.signatura, titulo , ContPrest
 FROM libros
 INNER JOIN ejemplares ON libros.signatura = ejemplares.signatura
-WHERE contPrestados > 50
+WHERE contPrest > 50
 ORDER BY signatura;
 
 

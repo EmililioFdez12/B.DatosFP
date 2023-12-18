@@ -1,9 +1,4 @@
 -- 1 Modifica el precio de los libros de los autores que nacieron antes de 01-01-1980. El nuevo precio debe ser un 5% más barato.
-
-
-Crea una vista v_editoriales donde se muestren todos los campos de editoriales, y un nuevo campo Ciudad que indique la Ciudad dependiendo del campo código postal. (Usa la sentencia CASE).
-Crea el usuario 'invitado' que tendrá todos los permisos para la BBDD librería, y los permisos de selección y modificación para la BBDD World. Realiza pruebas que confirmen que los permisos están funcionando.
-Muestra los permisos del usuario 'invitado'. Elimina el permiso de modificación para la BBDD World. Realiza pruebas que confirmen que los permisos están funcionando.
 SELECT * 
 FROM bd_libreria.libros;
 
@@ -32,6 +27,7 @@ from autores;
 
 -- 4 Crea una vista v_editoriales donde se muestren todos los campos de editoriales, 
 -- y un nuevo campo Ciudad que indique la Ciudad dependiendo del campo código postal. (Usa la sentencia CASE).
+DROP view v_editoriales;
 
 CREATE VIEW v_editoriales AS
 SELECT *,
@@ -47,7 +43,7 @@ SELECT *,
 FROM editoriales;
 
 SELECT *
-FROM v_editorial;
+FROM v_editoriales;
     
 UPDATE editoriales
 SET codigo_postal = CASE 
@@ -64,5 +60,12 @@ END;
 
 -- 5 Crea el usuario 'invitado' que tendrá todos los permisos para la BBDD librería, 
 -- y los permisos de selección y modificación para la BBDD World. Realiza pruebas que confirmen que los permisos están funcionando.
+
+--  creo los ususarios y concedo todos los permisos para la base de datos 'libreria'
+CREATE USER 'invitado'@'localhost' IDENTIFIED BY '1234';
+GRANT ALL PRIVILEGES ON bd_libreria TO 'invitado'@'localhost';
+
+
+
 
 

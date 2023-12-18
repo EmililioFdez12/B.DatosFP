@@ -1,4 +1,4 @@
--- 1 Mostrar el nombre del producto y el nombre de la categoría de todos los productos que contengan la letra Q en el nombre.
+  -- 1 Mostrar el nombre del producto y el nombre de la categoría de todos los productos que contengan la letra Q en el nombre.
 SELECT producto, categorias.categoria
 FROM productos
 JOIN categorias ON productos.categoria_id = categorias.id
@@ -31,23 +31,23 @@ SELECT year(fecha_pedido) año, month(fecha_pedido) mes,
 SUM(cantidad * precio_unidad *(1 - descuento)) total
 FROM pedidos INNER JOIN detalles ON id = pedido_id;
 
-
-
 -- 6 Los pedidos que hizo la empleada Nancy.
 SELECT pedidos.id , empleados.nombre
 FROM empleados
 INNER JOIN pedidos ON empleados.id = pedidos.cliente_id
 WHERE empleados.id = 1;
 
--- 07 Mostrar los pedidos de Anton (código cliente).
+-- 7 Mostrar los pedidos de Anton (código cliente).
 SELECT pedidos.id ,clientes.id, clientes.codigo
 FROM clientes
 INNER JOIN pedidos ON clientes.id = pedidos.cliente_id
 WHERE cliente_id = 3;
 
 -- 08 Cuántos productos hay de cada categoría y el precio medio.
-SELECT producto, productos.categoria_id
-FROM productos;
+SELECT categoria, COUNT(p.id), AVG(precio_unidad) precio_medio
+FROM productos p
+  inner JOIN categorias c ON p.categoria_id = c.id
+GROUP BY categoria;
 
 -- 09 Mostrar los pedidos que tienen productos en la categoría 2 o 3.
 SELECT detalles.pedido_id
