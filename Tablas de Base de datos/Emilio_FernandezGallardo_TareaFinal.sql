@@ -156,3 +156,4 @@ WHERE CountryCode = 'ESP';
 -- El valor que debe aparecer es el id_ciudad de la tabla Ciudades, para cada campo Encuestas.Ciudad.
 
 
+
