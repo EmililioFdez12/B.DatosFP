@@ -108,3 +108,4 @@ REVOKE SELECT ON sakila.rental FROM 'arodriguez_administracion'@'localhost';
 SHOW GRANTS FOR 'arodriguez_administracion'@'localhost';
 -- Elimina el permiso de eliminación del rol de ventas.
 REVOKE DELETE ON bd_neptuno2.* FROM dpto_ventas;
+
