@@ -57,6 +57,8 @@ FROM residentes
 INNER JOIN residentescronicos ON residentes.NSS = residentescronicos.NSS
 INNER JOIN enfermedades ON residentescronicos.IdEnfermedad = enfermedades.IdEnfermedad;
 
+SELECT * FROM cronicos;
+
 -- 8. Mostrar el nombre de cada Enfermedad con la cantidad de Residentes que la padecen.
 SELECT enfermedad, COUNT(residentescronicos.NSS) as NºEnfermos
 FROM enfermedades
@@ -79,9 +81,17 @@ CREATE ROLE rl_residencia;
 GRANT SELECT ON residencia.* TO rl_residencia; 
 GRANT INSERT, UPDATE ON residencia.residentes TO rl_residencia;
 
-CREATE USER 'antonio@localhost' IDENTIFIED BY '1234';
-GRANT 'antonio@localhost' TO rl_residencia;
+
+CREATE USER 'antonio'@'localhost' IDENTIFIED BY '1234';
+GRANT 'antonio'@'localhost' TO rl_residencia;
+
+GRANT SELECT ON residencia.* TO 'antonio'@'localhost';
 
 DROP ROLE rl_residencia;
 DROP USER 'antonio@localhost';
 
+SHOW GRANTS FOR 'antonio'@'localhost';
+
+use mysql;
+select user from user;
+residentes
