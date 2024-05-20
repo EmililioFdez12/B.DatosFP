@@ -1,11 +1,10 @@
-SELECT CONCAT_WS(";", orders.orderNumber, orderDate, requiredDate, shippedDate, status, orders.customerNumber, customerName, country, COUNT(productCode)) AS concatenated_values
+SELECT orders.orderNumber, orderDate, requiredDate, shippedDate, status, orders.customerNumber, customerName, country, count(productCode) AS numProductos
 FROM orders
 INNER JOIN customers ON orders.customerNumber = customers.customerNumber
 INNER JOIN orderdetails ON orders.orderNumber = orderdetails.orderNumber
 WHERE requiredDate BETWEEN '2003-01-06' AND '2003-06-16'
-GROUP BY orders.orderNumber, orderDate, requiredDate, shippedDate, status, orders.customerNumber, customerName, country
-HAVING COUNT(orders.orderNumber) = 4;
-
+GROUP BY 1
+HAVING count(orders.orderNumber) = 4;
 
 DELIMITER //
 
@@ -20,7 +19,8 @@ BEGIN
 		ELSEIF numeroProductos <= 0 THEN
 			SELECT "ERROR: El número de prodcutos debe de ser mayor de 0";
 		ELSE      
-			SELECT orders.orderNumber, orderDate, requiredDate, shippedDate, status, orders.customerNumber, customerName, country, count(productCode) AS numProductos
+			SELECT CONCAT(orders.orderNumber, ";",  orderDate,  ";", requiredDate,  ";", shippedDate,  ";",  status, ";"
+            , orders.customerNumber, ";", customerName, ";", country, count(productCode))AS numProductos
 			FROM orders
 			INNER JOIN customers ON orders.customerNumber = customers.customerNumber
 			INNER JOIN orderdetails ON orders.orderNumber = orderdetails.orderNumber
